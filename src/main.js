@@ -6,8 +6,7 @@ import './plugins/element.js'
 import '@/assets/css/global.css'
 // 导入字体图标
 import '@/assets/fonts/iconfont.css'
-
-// import axios from 'axios'
+import TreeTable from 'vue-table-with-tree-grid'
 
 import request from '@/utils/request'
 // 配置请求的根路径
@@ -15,7 +14,7 @@ import request from '@/utils/request'
 
 Vue.prototype.$API = request
 
-import { Form, FormItem, Input, Button, Message, Container, Header, Aside, Main, Menu, MenuItem, Submenu, Breadcrumb, BreadcrumbItem, Card, Row, Col, Table, TableColumn, Switch, Tooltip, Pagination, Dialog, MessageBox, Tag, Tree, Select, Option } from 'element-ui'
+import { Form, FormItem, Input, Button, Message, Container, Header, Aside, Main, Menu, MenuItem, Submenu, Breadcrumb, BreadcrumbItem, Card, Row, Col, Table, TableColumn, Switch, Tooltip, Pagination, Dialog, MessageBox, Tag, Tree, Select, Option, Cascader } from 'element-ui'
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
@@ -42,10 +41,13 @@ Vue.use(Tag)
 Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Cascader)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 
 Vue.config.productionTip = false
+Vue.component('tree-table', TreeTable)
+
 
 new Vue({
   router,
