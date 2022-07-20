@@ -72,6 +72,7 @@
                 type="warning"
                 icon="el-icon-setting"
                 size="mini"
+                @click="showSetRoleDialog(row)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -102,13 +103,22 @@
       ref="editDialog"
       @changeEditUser="changeEditUser"
     ></EditDialog>
+
+    <!-- 分配角色的对话框 -->
+    <SetRoleDialog
+      :userinfo="userinfo"
+      :roleList="roleList"
+      ref="showRoleDialog"
+      @getUserList="getUserList"
+    ></SetRoleDialog>
   </div>
 </template>
 
 <script>
-// 引入adddialog
+// 引入对话框组件
 import AddDialog from "@/views/Users/AddDialog";
 import EditDialog from "@/views/Users/EditDialog";
+import SetRoleDialog from "@/views/Users/SetRoleDialog";
 export default {
   data() {
     // 定义自定义校验规则
@@ -122,13 +132,15 @@ export default {
         // 当前的页数
         pagenum: 1,
         // 当前每页显示多少条数据
-        pagesize: 2,
+        pagesize: 5,
       },
       userList: [],
       total: 0,
 
       // 添加与修改对话框的展示
       scene: 0, // 1代表展示添加用户的对话框 2代表展示修改用户的对话框
+      userinfo: {}, //需要被角色的用户信息
+      roleList: [], //所有角色的数据列表
     };
   },
   mounted() {
@@ -224,11 +236,25 @@ export default {
       //  获取数据
       this.getUserList();
     },
+
+    // 显示角色分配对话框
+    async showSetRoleDialog(userinfo) {
+      // 显示setRole对话框
+      this.userinfo = userinfo;
+      // 在展示对话框之前，获取所有角色的列表
+      const { data: res } = await this.$API.get("roles");
+      if (res.meta.status !== 200)
+        return this.$message.error("获取角色列表失败！");
+
+      this.roleList = res.data;
+      this.$refs.showRoleDialog.setRoleDialogVisible = true;
+    },
   },
 
   components: {
     AddDialog,
     EditDialog,
+    SetRoleDialog,
   },
 };
 </script>

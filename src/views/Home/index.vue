@@ -6,10 +6,10 @@
         <img src="@/assets/logo.png" alt="" />
         <span>电商后台管理系统</span>
       </div>
-      <el-button @click="logout">退出</el-button>
+      <el-button @click="logout" size="mini">退出</el-button>
     </el-header>
     <!-- 页面主体区域 -->
-    <el-container>
+    <el-container class="home-container">
       <!-- 侧边栏 -->
       <el-aside :width="isCollapse ? '64px' : '200px'">
         <div class="toggle-button" @click="toggleCollapse">
@@ -30,6 +30,7 @@
             ></path>
           </svg>
         </div>
+
         <!-- 侧边栏-菜单区域 -->
         <el-menu
           active-text-color="#408eff"
@@ -131,7 +132,7 @@ export default {
 
 <style lang="less" scoped>
 .home-container {
-  height: 100vh;
+  height: 100%;
 }
 .el-header {
   display: flex;
