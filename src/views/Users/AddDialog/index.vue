@@ -115,7 +115,7 @@ export default {
         // 隐藏添加用户的对话框
         this.addDialogVisible = false;
 
-        // 添加用户信息成功后，通知父组件发请求获取用户列表信息
+        //通知父组件 获取用户信息里列表
         this.$emit("changeAddUser");
       });
     },

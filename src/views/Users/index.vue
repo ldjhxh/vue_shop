@@ -91,18 +91,10 @@
       </el-pagination>
     </el-card>
     <!-- 添加用户对话框 -->
-    <AddDialog
-      v-show="scene === 1"
-      @changeAddUser="changeAddUser"
-      ref="addDialog"
-    ></AddDialog>
+    <AddDialog @changeAddUser="getUserList" ref="addDialog"></AddDialog>
 
     <!-- 修改用户的对话框 -->
-    <EditDialog
-      v-show="scene === 2"
-      ref="editDialog"
-      @changeEditUser="changeEditUser"
-    ></EditDialog>
+    <EditDialog ref="editDialog" @changeEditUser="getUserList"></EditDialog>
 
     <!-- 分配角色的对话框 -->
     <SetRoleDialog
@@ -137,9 +129,7 @@ export default {
       userList: [],
       total: 0,
 
-      // 添加与修改对话框的展示
-      scene: 0, // 1代表展示添加用户的对话框 2代表展示修改用户的对话框
-      userinfo: {}, //需要被角色的用户信息
+      userinfo: {}, //所有角色的用户信息
       roleList: [], //所有角色的数据列表
     };
   },
@@ -167,7 +157,6 @@ export default {
     },
     // 监听 页码值 改变的事件
     handleCurrentChange(newPage) {
-      //   console.log(newPage);
       this.queryInfo.pagenum = newPage;
       // 发请求
       this.getUserList();
@@ -184,30 +173,14 @@ export default {
       this.$message.success("更新用户状态成功");
     },
 
-    // 添加新用户的回调
-    // 当添加用户成功后 ， 刷新数据列表
-    changeAddUser() {
-      // 获取用户列表数据
-      this.getUserList();
-    },
-
-    changeEditUser() {
-      // 当编辑用户信息成功后，重新获取用户列表数据
-      this.getUserList();
-    },
-
     // 展示添加用户的对话框
     showAddDialog() {
-      // 切换场景
-      this.scene = 1;
       this.$refs.addDialog._data.addDialogVisible = true;
     },
     // 展示编辑用户的对话框
     showEditDialog(row) {
-      // 切换场景
-      this.scene = 2;
       // 调用editDialog组件中的方法
-      //   获取用户列表信息
+      //  获取用户列表信息
       this.$refs.editDialog.showEditDialog(row.id);
     },
 
