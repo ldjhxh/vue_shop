@@ -19,6 +19,7 @@
 
       <!-- 表格 -->
       <tree-table
+        :show-row-hover="false"
         :data="cateList"
         :columns="columns"
         :selection-type="false"
