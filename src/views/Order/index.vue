@@ -177,7 +177,6 @@ export default {
       //   const { data: res } = await this.$API.get("kuaidi/1106975712662");
       //   if (res.meta.status !== 200)
       //     return this.$message.error("获取物流进度失败！");
-
       this.progressInfo = this.progressTestInfo.data;
       this.progressVisible = true;
     },
